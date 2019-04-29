@@ -10,9 +10,9 @@ This project holds the minimal set of things that you require to create a custom
     2. DestinationDataSet1
     3. DestinationDataSet2
     4. DemoProcess that ties the source to destination datasets
- 3. Kafka subscriber of the Atlas ENTITY_ENTITIES (as a showcase of how Ranger works)
- 4. Case classes representing the Demo entities
- 5. A Typeclass that converts the case classes into Referenceable and AtlasEntity 
+ 3. Case classes representing the Demo entities
+ 4. A Typeclass that converts the case classes into Referenceable and AtlasEntity
+ 5. TODO: Kafka subscriber of the Atlas ENTITY_ENTITIES (as a showcase of how Ranger works) 
 
  
 ## Note
@@ -26,7 +26,7 @@ This project holds the minimal set of things that you require to create a custom
 
 ### Testcases
 
-Much to the curses of my colleagues, this project does NOT have a single testcase. YOLO
+Much to the disappointment of my colleagues, this project does NOT have a single testcase. YOLO.
 
 
 ### Screenshots
