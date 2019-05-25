@@ -16,6 +16,7 @@ lazy val projectDeps = Seq(
   "org.apache.atlas" % "atlas-notification" % atlasV,
   "org.apache.atlas" % "atlas-intg" % atlasV,
   "org.apache.atlas" % "atlas-client-v2" % atlasV,
+  "com.typesafe.akka" %% "akka-stream-kafka" % "1.0.2",
   "org.scalatest" %% "scalatest" % "3.0.5" % Test
 )
 

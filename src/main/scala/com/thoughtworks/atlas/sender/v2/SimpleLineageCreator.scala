@@ -1,6 +1,6 @@
-package com.thoughtworks.atlas.v2
+package com.thoughtworks.atlas.sender.v2
 
-import com.thoughtworks.atlas.fixtures
+import com.thoughtworks.atlas.sender.fixtures
 import org.apache.atlas.AtlasClientV2
 import org.apache.atlas.hook.AtlasHook
 import org.apache.atlas.model.instance.{AtlasEntity, EntityMutationResponse}
@@ -21,10 +21,10 @@ object SimpleLineageCreator extends App {
   val fields = fixtures.fields.map(_.toAtlas)
   val users = fixtures.users.map(_.toAtlas)
 
-  val sourceAtlas = fixtures.sourceDataSet.toAtlas
-  val dest1Atlas = fixtures.destDataSet1.toAtlas
-  val dest2Atlas = fixtures.destDataSet2.toAtlas
-  val processAtlas = fixtures.demoProcess.toAtlas
+  val sourceAtlas = fixtures.songsSourceDataset.toAtlas
+  val dest1Atlas = fixtures.songsByCityDataset.toAtlas
+  val dest2Atlas = fixtures.songsByCountryDataset.toAtlas
+  val processAtlas = fixtures.songsPipeline.toAtlas
 
   val persistableEntities = fields ++ users ++ List(sourceAtlas, dest1Atlas, dest2Atlas, processAtlas)
 
@@ -58,7 +58,7 @@ class AtlasKafkaWriter extends AtlasHook {
 
 object AtlasRestWriter {
 
-  val atlasClientV2 = new AtlasClientV2(Array("http://localhost:21000"), Array("admin", "admin"))
+  val atlasClientV2 = new AtlasClientV2(Array("http://ec2-52-221-185-64.ap-southeast-1.compute.amazonaws.com:21000"), Array("admin", sys.env("ATLAS_PASSWORD")))
 
   def store(entities: List[AtlasEntity]): EntityMutationResponse = {
 

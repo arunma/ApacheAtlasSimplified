@@ -14,7 +14,12 @@ This project holds the minimal set of things that you require to create a custom
  4. A Typeclass that converts the case classes into Referenceable and AtlasEntity
  5. TODO: Kafka subscriber of the Atlas ENTITY_ENTITIES (as a showcase of how Ranger works) 
 
+
+## Upload model
  
+```$bash
+curl -u admin:admin -ik -H "Content-Type: application/json" -X POST http://localhost:21000/api/atlas/v2/types/typedefs -d @end_content_fact.json
+```
 ## Note
 
 1. There are two versions of the program catering to both Atlas Version 1 and Version 2 APIs.

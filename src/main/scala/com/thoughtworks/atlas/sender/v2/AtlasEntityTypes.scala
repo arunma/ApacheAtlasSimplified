@@ -1,8 +1,8 @@
-package com.thoughtworks.atlas.v2
+package com.thoughtworks.atlas.sender.v2
 
 import java.lang.{Boolean => JBoolean}
 
-import com.thoughtworks.atlas.models._
+import com.thoughtworks.atlas.sender.models._
 import org.apache.atlas.model.instance.AtlasEntity
 import org.apache.atlas.v1.model.instance.Id
 import simulacrum.typeclass
@@ -21,11 +21,11 @@ object AtlasEntityTypes {
 
   private val NameAttribute = "name"
   private val QualifiedName = "qualifiedName"
-  implicit val demoDataSetAtlas: AtlasEntityTypes[DemoDataSet] = new AtlasEntityTypes[DemoDataSet] {
-    override def toAtlas(demo: DemoDataSet): AtlasEntity = {
+  implicit val demoDataSetAtlas: AtlasEntityTypes[PlayListDataset] = new AtlasEntityTypes[PlayListDataset] {
+    override def toAtlas(demo: PlayListDataset): AtlasEntity = {
       val entity = new AtlasEntity(demo.typeName, NameAttribute, demo.name)
       entity.setGuid(demo.qualifiedName)
-      entity.setAttribute("id", new Id(demo.qualifiedName, 1, "DemoDataSet"))
+      entity.setAttribute("id", new Id(demo.qualifiedName, 1, "PlayListDataset"))
       entity.setAttribute(QualifiedName, demo.qualifiedName)
       entity.setAttribute("description", demo.description)
       entity.setAttribute("dataShape", demo.dataShape)
@@ -44,11 +44,11 @@ object AtlasEntityTypes {
       entity
     }
   }
-  implicit val demoUserAtlas: AtlasEntityTypes[DemoUser] = new AtlasEntityTypes[DemoUser] {
-    override def toAtlas(demo: DemoUser): AtlasEntity = {
+  implicit val demoUserAtlas: AtlasEntityTypes[PlayListUser] = new AtlasEntityTypes[PlayListUser] {
+    override def toAtlas(demo: PlayListUser): AtlasEntity = {
       val entity = new AtlasEntity(demo.typeName, NameAttribute, demo.name)
       entity.setGuid(demo.qualifiedName)
-      entity.setAttribute("id", new Id(demo.qualifiedName, 1, "DemoUser"))
+      entity.setAttribute("id", new Id(demo.qualifiedName, 1, "PlayListUser"))
       entity.setAttribute(QualifiedName, demo.qualifiedName)
       entity.setAttribute("sourceSystem", demo.sourceSystem)
       entity.setAttribute("description", demo.description)
@@ -58,11 +58,11 @@ object AtlasEntityTypes {
     }
   }
 
-  implicit val demoFieldAtlas: AtlasEntityTypes[DemoField] = new AtlasEntityTypes[DemoField] {
-    override def toAtlas(demo: DemoField): AtlasEntity = {
+  implicit val demoFieldAtlas: AtlasEntityTypes[PlayListField] = new AtlasEntityTypes[PlayListField] {
+    override def toAtlas(demo: PlayListField): AtlasEntity = {
       val entity = new AtlasEntity(demo.typeName, NameAttribute, demo.name)
       entity.setGuid(demo.qualifiedName)
-      entity.setAttribute("id", new Id(demo.qualifiedName, 1, "DemoField"))
+      entity.setAttribute("id", new Id(demo.qualifiedName, 1, "PlayListField"))
       entity.setAttribute(QualifiedName, demo.qualifiedName)
       entity.setAttribute("dataType", demo.dataType)
       entity.setAttribute("description", demo.description)
@@ -72,11 +72,11 @@ object AtlasEntityTypes {
     }
   }
 
-  implicit val demoProcessAtlas: AtlasEntityTypes[DemoProcess] = new AtlasEntityTypes[DemoProcess] {
-    override def toAtlas(demo: DemoProcess): AtlasEntity = {
+  implicit val demoProcessAtlas: AtlasEntityTypes[PlayListPipeline] = new AtlasEntityTypes[PlayListPipeline] {
+    override def toAtlas(demo: PlayListPipeline): AtlasEntity = {
       val entity = new AtlasEntity(demo.typeName, NameAttribute, demo.name)
       entity.setGuid(demo.qualifiedName)
-      entity.setAttribute("id", new Id(demo.qualifiedName, 1, "DemoProcess"))
+      entity.setAttribute("id", new Id(demo.qualifiedName, 1, "PlayListPipeline"))
       entity.setAttribute(QualifiedName, demo.qualifiedName)
       entity.setAttribute("operations", demo.operations.toArray)
       entity.setAttribute("inputs", demo.inputs.map(_.toAtlas).asJava)

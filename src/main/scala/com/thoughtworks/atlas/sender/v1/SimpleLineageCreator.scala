@@ -1,6 +1,6 @@
-package com.thoughtworks.atlas.v1
+package com.thoughtworks.atlas.sender.v1
 
-import com.thoughtworks.atlas.fixtures
+import com.thoughtworks.atlas.sender.fixtures
 import org.apache.atlas.AtlasClient
 import org.apache.atlas.`type`.AtlasType
 import org.apache.atlas.hook.AtlasHook
@@ -21,10 +21,10 @@ object SimpleLineageCreator extends App {
   val fields = fixtures.fields.map(_.toReference)
   val users = fixtures.users.map(_.toReference)
 
-  val sourceAtlas = fixtures.sourceDataSet.toReference
-  val dest1Atlas = fixtures.destDataSet1.toReference
-  val dest2Atlas = fixtures.destDataSet2.toReference
-  val processAtlas = fixtures.demoProcess.toReference
+  val sourceAtlas = fixtures.songsSourceDataset.toReference
+  val dest1Atlas = fixtures.songsByCityDataset.toReference
+  val dest2Atlas = fixtures.songsByCountryDataset.toReference
+  val processAtlas = fixtures.songsPipeline.toReference
 
   val persistableEntities = fields ++ users ++ List(sourceAtlas, dest1Atlas, dest2Atlas, processAtlas)
 
@@ -32,11 +32,12 @@ object SimpleLineageCreator extends App {
   /*val atlasWriter = new AtlasKafkaWriter
   atlasWriter.store(persistableEntities)*/
   AtlasRestWriter.store(persistableEntities)
-  Thread.sleep(2000)
+  Thread.sleep(1000)
+  println ("Upload to Atlas Done !")
 
 }
 
-class AtlasKafkaWriter extends AtlasHook {
+/*class AtlasKafkaWriter extends AtlasHook {
 
   def store (entities: List[Referenceable])(implicit ec: ExecutionContext): Future[Unit] = Future {
     import scala.collection.JavaConverters._
@@ -52,11 +53,10 @@ class AtlasKafkaWriter extends AtlasHook {
 
     }
   }
-}
-
+}*/
 object AtlasRestWriter {
 
-  val atlasClient = new AtlasClient(Array("http://localhost:21000"), Array("admin", "admin"))
+  val atlasClient = new AtlasClient(Array("http://ec2-52-221-185-64.ap-southeast-1.compute.amazonaws.com:21000"), Array("admin", sys.env("ATLAS_PASSWORD")))
 
   def store(entities: List[Referenceable]) = {
     //atlasClient.createEntity(entities.asJavaCollection)
